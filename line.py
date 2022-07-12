@@ -120,4 +120,14 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.show()
 
+#가충치에 대하여 제곱 오차 미분하기
+y_hat = x_i * w + b
+err = y_i - y_hat
+w_rate = x_i
+w = w + w_rate * err
+
+#절편에 대하여 제곱 오차 미분하기
+err = y_i - y_hat
+b = b + 1 * err
+
 #뉴런 만들기
