@@ -28,33 +28,33 @@ y_hat = x[0] * w + b
 print(y_hat)
 print(y[0])
 
-#
+#가중치 증가
 w_inc = w + 0.1
 y_hat_inc = w_inc * x[0] + b
 print(y_hat_inc)
 
-#
+#가중치 변화율
 w_rate = (y_hat_inc - y_hat) / (w_inc - w)
 print(w_rate)
 
-#
+#새로운 가중치
 w_new = w + w_rate
 print(w_new)
 
-#
+#b의 증가
 b_inc = b + 0.1
 y_hat_inc = x[0] * w + b_inc
 print(y_hat_inc)
 
-#
+#b의 변화율
 b_rate = (y_hat_inc - y_hat) / (b_inc - b)
 print(b_rate)
 
-#
+#새로운 b
 b_new = b + 1
 print(b_new)
 
-#
+#오차 줄이기
 err = y[0] - y_hat
 w_new = w + w_rate * err
 b_new = b + 1 * err
