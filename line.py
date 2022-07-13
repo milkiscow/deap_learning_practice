@@ -131,3 +131,39 @@ err = y_i - y_hat
 b = b + 1 * err
 
 #뉴런 만들기
+class Neuron:
+    
+    def __init__(self):
+        self.w = 1.0     # 가중치를 초기화합니다
+        self.b = 1.0     # 절편을 초기화합니다
+    
+    def forpass(self, x):       #정방향 계산
+        y_hat = x * self.w + self.b       # 직선 방정식을 계산합니다
+        return y_hat
+    
+    def backprop(self, x, err):     #역방향 계산
+        w_grad = x * err    # 가중치에 대한 그래디언트를 계산합니다
+        b_grad = 1 * err    # 절편에 대한 그래디언트를 계산합니다
+        return w_grad, b_grad
+
+    def fit(self, x, y, epochs=100):        #모델 훈련
+        for i in range(epochs):           # 에포크만큼 반복합니다
+            for x_i, y_i in zip(x, y):    # 모든 샘플에 대해 반복합니다
+                y_hat = self.forpass(x_i) # 정방향 계산
+                err = -(y_i - y_hat)      # 오차 계산
+                w_grad, b_grad = self.backprop(x_i, err)  # 역방향 계산
+                self.w -= w_grad          # 가중치 업데이트
+                self.b -= b_grad          # 절편 업데이트
+    
+#훈련해보기            
+neuron = Neuron()
+neuron.fit(x, y)        #자동으로 100번 반복함.
+
+#학습된 모델의 가중치와 절편 확인하기
+plt.scatter(x, y)
+pt1 = (-0.1, -0.1 * neuron.w + neuron.b)
+pt2 = (0.15, 0.15 * neuron.w + neuron.b)
+plt.plot([pt1[0], pt2[0]], [pt1[1], pt2[1]])
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
